@@ -2,14 +2,15 @@
 #include <fstream>
 
 using namespace std;
-int fail() {
+void fail() {
     cout << "Хорошо, читаю файл." << endl;
     ifstream fin("1laba.txt");
     if (!fin.is_open())
         cout << "Файл невозможно открыть. Завершаю работу." << endl;
     else {
-        char a1[15]; // Предположим, что пользователь не будет вводить числа,
-        char a2[15]; // длина которых больше 15 символов.
+        char a1[15], a2[15]; // Если будем использовать double,
+                             // число будет сильно округляться. 
+                             // Поэтому удобнее сохранить хотя бы первые 15 знаков.
         int i;
         fin >> a1;
         ofstream fout("1labaout.txt");
@@ -25,12 +26,11 @@ int fail() {
         fin.close();
         fout.close();
     }
-    return 0;
 }
 
-int cons() {
+void cons() {
     cout << "Хорошо, вводите данные. Все числа должны быть в одной строке." << endl;
-    char s1[15], s2[15]; // Снова надеемся, что числа будут короче 15 символов.
+    char s1[15], s2[15];
     cin >> s1;
     int i;
     ofstream fout("1labaout.txt");
@@ -53,7 +53,6 @@ int cons() {
     else {
         cout << "Хорошо, завершаю работу." << endl;
     }
-    return 0;
 }
 
 int main() {
