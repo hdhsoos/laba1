@@ -59,13 +59,18 @@ int main() {
     setlocale(LC_ALL, "rus");
     cout << "Вы хотите ввести данные из файла или из консоли?" << endl;
     cout << "0 - из файла, 1 - из консоли." << endl;
-    int a{};
+    char a{};
     cin >> a;
-    if (a == 1) {
+    if (a == '1') {
         cons();
     }
     else {
-        fail();
+        if (a == '0') {
+            fail();
+        }
+        else {
+            cout << "Ошибка ввода. Завершаю программу." << endl;
+        }
     }
 }
 
