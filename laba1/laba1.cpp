@@ -8,10 +8,10 @@ void fail() {
     if (!fin.is_open())
         cout << "Файл невозможно открыть. Завершаю работу." << endl;
     else {
-        char a1[15], a2[15]; // Если будем использовать double,
+        char a1[15]{}, a2[15]{}; // Если будем использовать double,
                              // число будет сильно округляться. 
                              // Поэтому удобнее сохранить хотя бы первые 15 знаков.
-        int i;
+        int i{};
         fin >> a1;
         ofstream fout("1labaout.txt");
         for (i = 0; i < 69; i++) {
@@ -30,9 +30,9 @@ void fail() {
 
 void cons() {
     cout << "Хорошо, вводите данные. Все числа должны быть в одной строке." << endl;
-    char s1[15], s2[15];
+    char s1[15]{}, s2[15]{};
     cin >> s1;
-    int i;
+    int i{};
     ofstream fout("1labaout.txt");
     for (i = 0; i < 69; i++) {
         cin >> s2;
@@ -45,7 +45,7 @@ void cons() {
     fout << s1 << endl;
     fout.close();
     cout << "Хотите повторить ввод исходных данных ? Да — 1, Нет — 0." << endl;
-    int a;
+    int a{};
     cin >> a;
     if (a == 1) {
         cons();
@@ -59,7 +59,7 @@ int main() {
     setlocale(LC_ALL, "rus");
     cout << "Вы хотите ввести данные из файла или из консоли?" << endl;
     cout << "0 - из файла, 1 - из консоли." << endl;
-    int a;
+    int a{};
     cin >> a;
     if (a == 1) {
         cons();
@@ -68,3 +68,4 @@ int main() {
         fail();
     }
 }
+
