@@ -2,19 +2,41 @@
 #include <fstream>
 
 using namespace std;
+
+int isdi(char s[]) {
+    int i{};
+    for (i = 0; i < 256; i++) {
+        if (!isdigit(s[i])) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int fail() {
     cout << "Хорошо, читаю файл." << endl;
     ifstream fin("1laba.txt");
     if (!fin.is_open())
         cout << "Файл невозможно открыть. Завершаю работу." << endl;
     else {
-        char a1[15]; // Предположим, что пользователь не будет вводить числа,
-        char a2[15]; // длина которых больше 15 символов.
-        int i;
+        char a1[256]{}, a2[256]{}; // Если будем использовать double,
+                                   // число будет сильно округляться. 
+        int i{};
         fin >> a1;
+        bool isd;
+        isd = isdi(a1);
+        if (isd == 1) {
+            cout << "Ошибка ввода. Завершаю работу." << endl;
+            return 0;
+        }
         ofstream fout("1labaout.txt");
         for (i = 0; i < 69; i++) {
             fin >> a2;
+            isd = isdi(a2);
+            if (isd == 1) {
+                cout << "Ошибка ввода. Завершаю работу." << endl;
+                return 0;
+            }
             fout << a2;
             fout << " ";
             cout << a2;
@@ -24,18 +46,30 @@ int fail() {
         cout << a1;
         fin.close();
         fout.close();
+        return 0;
     }
-    return 0;
 }
 
-int cons() {
-    cout << "Хорошо, вводите данные. Все числа должны быть в одной строке." << endl;
-    char s1[15], s2[15]; // Снова надеемся, что числа будут короче 15 символов.
+void cons() {
+    cout << "Хорошо, вводите данные. Все числа должны быть в одной строке через пробел." << endl;
+    char s1[256]{}, s2[256]{};
     cin >> s1;
-    int i;
+    int i{};
+    bool isd{};
+    isd = isdi(s1);
+    if (isd == 1) {
+        cout << "Ошибка ввода. Попробуйте снова." << endl;
+        cons();
+    }
     ofstream fout("1labaout.txt");
     for (i = 0; i < 69; i++) {
         cin >> s2;
+        isd = isdi(s1);
+        while (isd == 1) {
+            cout << "Ошибка ввода. Попробуйте снова." << endl;
+            cin >> s2;
+            isd = isdi(s1);
+        }
         fout << s2;
         fout << " ";
         cout << s2;
@@ -45,7 +79,7 @@ int cons() {
     fout << s1 << endl;
     fout.close();
     cout << "Хотите повторить ввод исходных данных ? Да — 1, Нет — 0." << endl;
-    int a;
+    int a{};
     cin >> a;
     if (a == 1) {
         cons();
@@ -53,19 +87,25 @@ int cons() {
     else {
         cout << "Хорошо, завершаю работу." << endl;
     }
-    return 0;
 }
 
 int main() {
     setlocale(LC_ALL, "rus");
     cout << "Вы хотите ввести данные из файла или из консоли?" << endl;
     cout << "0 - из файла, 1 - из консоли." << endl;
-    int a;
+    char a[256]{};
     cin >> a;
-    if (a == 1) {
+    if (a[0] == '1') {
         cons();
     }
     else {
-        fail();
+        if (a[0] == '0') {
+            fail();
+        }
+        else {
+            cout << "Ошибка ввода. Попробуйте снова." << endl;
+            main();
+        }
     }
 }
+
