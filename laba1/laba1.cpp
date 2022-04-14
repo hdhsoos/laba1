@@ -1,7 +1,8 @@
 ﻿#include <iostream>
 using namespace std;
-#include "C:\Users\andre\source\repos\laba1\laba1\myfuncs.h"
-#include "C:\Users\andre\source\repos\laba1\laba1\myfuncs.cpp"
+#include "C:\Users\andre\source\repos\laba1 — копия\laba1\myfuncs.h"
+#include "C:\Users\andre\source\repos\laba1 — копия\laba1\myfuncs.cpp"
+
 
 int main() {
     setlocale(LC_ALL, "rus");

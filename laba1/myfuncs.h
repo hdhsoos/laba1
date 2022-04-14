@@ -4,5 +4,7 @@
 int isdi();
 int fail();
 void cons();
+int dend();
+int vivod();
 
 #endif
